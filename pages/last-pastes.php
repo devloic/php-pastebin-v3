@@ -36,8 +36,8 @@ if (!defined("IN_PASTE"))
  if (isset($_GET['searchToken'])) {
  	$startUp->redirect($conf['baseurl'].'/search/'.urlencode($_GET['searchPaste']));	 	
  } 
-  
-$smarty->assign("getPastespaginate",$startUp->getlastPastes());
+
+$smarty->assign("getPastespaginate",$startUp->getlastPastesSearch($_GET['searchPaste']));
 
 $hook->set_title('laste_paste', $lang["titlelastpaste"]); 
 $hook->add_block('defaultLastpates', '', '',740,10); 

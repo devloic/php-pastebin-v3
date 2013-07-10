@@ -301,6 +301,30 @@ class StartUp {
 	        }  
 		return $array; 
 	}
+	
+	function getlastPastesSearch($search){
+		global $db;		
+		$sql = "SELECT p.id,p.uniqueid,p.title,p.lang,p.paste,p.date,p.expire,p.exposure,p.hits,users.name, MATCH (title,paste) AGAINST ('".$search."') AS score   FROM ".$this->prefix_db."pastes AS p ";
+		$sql .= "INNER JOIN ".$this->prefix_db."users ON p.userid=users.id ";
+		$sql .= "WHERE exposure = 'public' ";
+		$sql .= " AND MATCH (title,paste) AGAINST ('".$search."')  ";
+		$sql .= "ORDER BY score DESC , p.date asc";
+
+ 		$items = $db->get_results($sql);
+		foreach ($items as $obj) {
+        		$array[$obj->id]['id'] = $obj->id;
+        		$array[$obj->id]['uniqueid'] = $obj->uniqueid;
+            	$array[$obj->id]['title'] = $this->Fuckxss($obj->title);
+				$array[$obj->id]['lang'] = $obj->lang;  
+				$array[$obj->id]['paste'] = $obj->paste; 
+           		$array[$obj->id]['date'] = $obj->date;
+           		$array[$obj->id]['expire'] = $obj->expire; 
+           		$array[$obj->id]['exposure'] = $obj->exposure; 
+           		$array[$obj->id]['hits'] = $obj->hits;
+           		$array[$obj->id]['name'] = $obj->name;
+	        }  
+		return $array; 
+	}
 	### 
 	function getTotalpaste($where=FALSE){
 		global $db;

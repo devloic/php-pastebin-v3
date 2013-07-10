@@ -543,7 +543,7 @@ class StartUp {
 	###	
 	function Fuckxss($var) {
 			strip_tags($var);
-			$output = htmlspecialchars($var, ENT_QUOTES);
+			$output = htmlspecialchars($var);
 		return $output;
 	}	
 	###

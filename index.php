@@ -54,7 +54,7 @@ else
  
 $smarty->assign("Name",$conf['title']);
 $smarty->assign("getConfigs",$conf);
-$smarty->assign("getUserdata",$startUp->getUserdata());
+$smarty->assign("getUserdata",@$startUp->getUserdata());
 $smarty->assign("footer",$startUp->addFooter()); 
 $smarty->assign("userId",$userId); 
 $smarty->assign("userName",$startUp->session_username);

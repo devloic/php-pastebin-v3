@@ -137,7 +137,7 @@ class StartUp {
 		$date = time();
 		$query = "INSERT INTO ".$this->prefix_db."pastes (id,userid,uniqueid,title,lang,paste,date,expire,exposure) 
 	          VALUES (
-			  'NULL',
+			  NULL,
 			  '".$db->escape($userid)."',
 			  '".$this->makeId()."',
 			  '".$db->escape($title)."',
@@ -147,9 +147,10 @@ class StartUp {
 			  '".$db->escape($expire)."',
 			  '".$db->escape($exposure)."'
 			  )";
+			
     		$db->query($query);
     		$id = $db->insert_id;
- 
+
     		$paste = $db->get_row("SELECT uniqueid FROM ".$this->prefix_db."pastes WHERE id='$id'");
      		$this->redirect($conf['baseurl'].'/'.$paste->uniqueid);
 	}

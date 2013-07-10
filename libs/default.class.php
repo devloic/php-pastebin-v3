@@ -302,15 +302,23 @@ class StartUp {
 		return $array; 
 	}
 	
-	function getlastPastesSearch($search){
+	function getlastPastesSearch($search=null){
 		global $db;		
+		
+		if ($search == null){
+				return $this->getlastPastes();
+		}
+		
 		$sql = "SELECT p.id,p.uniqueid,p.title,p.lang,p.paste,p.date,p.expire,p.exposure,p.hits,users.name, MATCH (title,paste) AGAINST ('".$search."') AS score   FROM ".$this->prefix_db."pastes AS p ";
 		$sql .= "INNER JOIN ".$this->prefix_db."users ON p.userid=users.id ";
 		$sql .= "WHERE exposure = 'public' ";
-		$sql .= " AND MATCH (title,paste) AGAINST ('".$search."')  ";
+		$sql .= " AND MATCH (title,paste) AGAINST ('".$search."*' IN BOOLEAN MODE)  ";
 		$sql .= "ORDER BY score DESC , p.date asc";
-
+		//BOOLEAN MODE for : http://stackoverflow.com/questions/9893207/mysql-full-text-search-plural-singular-form-of-words
+		
  		$items = $db->get_results($sql);
+		$array= array();
+		if ($items !== null){
 		foreach ($items as $obj) {
         		$array[$obj->id]['id'] = $obj->id;
         		$array[$obj->id]['uniqueid'] = $obj->uniqueid;
@@ -323,6 +331,7 @@ class StartUp {
            		$array[$obj->id]['hits'] = $obj->hits;
            		$array[$obj->id]['name'] = $obj->name;
 	        }  
+		}
 		return $array; 
 	}
 	### 

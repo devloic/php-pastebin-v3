@@ -68,22 +68,22 @@
 
   
 				{literal}
-				<script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8">
 					$(document).ready(function() {
-    					var oTable = $('#example').dataTable({
-    					"oSearch": {"sSearch": "{/literal}{if isset($smarty.get.searchPaste_NO)}{$smarty.get.searchPaste|escape:'html'}{/if}{literal}"},
-        				"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-        				"sPaginationType": "bootstrap",        				 
-        				"oLanguage": {
-					      "sSearch": "{/literal}{$lang.filterRecords}{literal}:",
+					var oTable = $('#example').dataTable({
+						"oSearch": {"sSearch": "{/literal}{if isset($smarty.get.searchPaste_NO)}{$smarty.get.searchPaste|escape:'html'}{/if}{literal}"},
+						"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+						"sPaginationType": "bootstrap",
+						"oLanguage": {
+							"sSearch": "{/literal}{$lang.filterRecords}{literal}:",
 					      "sLengthMenu": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {/literal}{$lang.display}{literal} _MENU_ {/literal}{$lang.records}{literal}",
 					      "sInfo": "{/literal}{$lang.gotAtotal}{literal} _TOTAL_ {/literal}{$lang.entriesToshow}{literal} (_START_ - _END_)"
 					    }					    
-        				});
-        				oTable.fnSort( [ [0,'desc'] ] );
-    				} );
-    			</script>
-    			{/literal}
+					});
+					oTable.fnSort( [ [0,'desc'] ] );
+					} );
+</script>
+				{/literal}
 
       
 {include file="footer.html"}

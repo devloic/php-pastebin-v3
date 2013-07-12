@@ -288,6 +288,8 @@ class StartUp {
 		$sql .= "ORDER BY p.date DESC LIMIT 0,200 ";
  
  		$items = $db->get_results($sql);
+ 		$array =  array();
+ 		if (count($items) > 0){
 		foreach ($items as $obj) {
         		$array[$obj->id]['id'] = $obj->id;
         		$array[$obj->id]['uniqueid'] = $obj->uniqueid;
@@ -299,7 +301,8 @@ class StartUp {
            		$array[$obj->id]['exposure'] = $obj->exposure; 
            		$array[$obj->id]['hits'] = $obj->hits;
            		$array[$obj->id]['name'] = $obj->name;
-	        }  
+	        } 
+ 		} 
 		return $array; 
 	}
 	
